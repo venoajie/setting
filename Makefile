@@ -23,7 +23,7 @@ swap-on:
 	set -e  # bail if anything goes wrong
 	swapon --show               # see what swap files you have active
 	sudo swapoff --all
-	# Create a new 16 GiB swap file in its place (could lock up your computer 
+	# Create a new 4 GiB swap file in its place (could lock up your computer 
 	# for a few minutes if using a spinning Hard Disk Drive [HDD], so be patient)
 	sudo dd if=/dev/zero of=/swapfile bs=512M count=8
 	sudo mkswap /swapfile       # turn this new file into swap space
