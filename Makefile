@@ -5,11 +5,11 @@ help:
 	@echo "swap-on - allocate swap"
 	@echo "save-git-credential - save git credential"
 
-
 install:
 	sudo NEEDRESTART_MODE=a apt-get dist-upgrade --yes
 	sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
 	yes | sudo apt-get upgrade && sudo apt update
+	yes | sudo apt-get install inotify-tools
 	sudo apt-get install --upgrade -y build-essential gdb lcov pkg-config libbz2-dev libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev libncurses5-dev libreadline-dev libsqlite3-dev libssl-dev lzma lzma-dev tk-dev uuid-dev # https://medium.com/@fsufitch/filips-awesome-overcomplicated-python-dev-environment-dd24ee2a009c
 	sudo apt-get install --upgrade python3 -y # check pyhton update
 	sudo apt-get install --upgrade python3-pip -y  # install pip
