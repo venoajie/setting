@@ -5,15 +5,6 @@ help:
 	@echo "swap-on - allocate swap"
 	@echo "save-git-credential - save git credential"
 
-oracle:
-yum install -y epel-release && yum update
-sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-sudo yum install inotify-tools
-sudo dnf module install python38
-sudo alternatives --set python3 /usr/bin/python3.8
-sudo dnf install python38-pip 
-python3 -m pip install --user black coverage flake8 mypy pylint pytest tox python-dotenv loguru numpy pandas dask
-
 
 install:
 	sudo NEEDRESTART_MODE=a apt-get dist-upgrade --yes
