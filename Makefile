@@ -5,6 +5,11 @@ help:
 	@echo "swap-on - allocate swap"
 	@echo "save-git-credential - save git credential"
 
+oracle:
+yum install -y epel-release && yum update
+sudo yum install inotify-tools
+sudo yum install inotify-tools
+
 install:
 	sudo NEEDRESTART_MODE=a apt-get dist-upgrade --yes
 	sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
