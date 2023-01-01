@@ -11,7 +11,8 @@ sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.
 sudo yum install inotify-tools
 sudo dnf module install python38
 sudo alternatives --set python3 /usr/bin/python3.8
-pip install black coverage flake8 mypy pylint pytest tox python-dotenv loguru numpy pandas dask
+sudo dnf install python38-pip 
+python3 -m pip install --user black coverage flake8 mypy pylint pytest tox python-dotenv loguru numpy pandas dask
 
 
 install:
