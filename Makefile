@@ -18,7 +18,7 @@ install:
 	sudo apt-get install --upgrade python3 -y # check pyhton update
 	sudo apt-get install --upgrade python3-pip -y  # install pip
 	sudo ln -s /usr/bin/python3 /usr/local/bin/py # python3 to py
-	pip3 install black coverage flake8 mypy pylint pytest tox python-dotenv loguru numpy pandas dask
+	pip3 install black coverage flake8 mypy pylint pytest tox python-dotenv loguru pytest-asyncio numpy pandas dask
 	yes | sudo apt-get upgrade && sudo apt update
 	sudo apt-get clean
 
