@@ -4,6 +4,7 @@ help:
 	@echo "install - install dependencies and requirements"
 	@echo "swap-on - allocate swap"
 	@echo "save-git-credential - save git credential"
+	@echo "ram-disk - resize ram disk (default = 2 GB)"
 
 
 install:
@@ -20,6 +21,12 @@ install:
 	pip3 install black coverage flake8 mypy pylint pytest tox python-dotenv loguru numpy pandas dask
 	yes | sudo apt-get upgrade && sudo apt update
 	sudo apt-get clean
+
+ram-disk:
+#https://towardsdev.com/linux-create-a-ram-disk-to-speed-up-your-i-o-file-operations-18dcaede61d2
+	sudo mount -t tmpfs -o rw,size=2G tmpfs src
+	sudo chmod 777 src
+	git pull
 
 swap-on:
 # https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-20-04 
