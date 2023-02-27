@@ -1,5 +1,3 @@
-.PHONY: virtual install build-requirements black isort flake8 clean-pyc clean-build docs clean
-
 help:
 	@echo "install - install dependencies and requirements"
 	@echo "swap-on - allocate swap"
