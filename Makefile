@@ -24,8 +24,10 @@ install:
 
 ram-disk:
 #https://towardsdev.com/linux-create-a-ram-disk-to-speed-up-your-i-o-file-operations-18dcaede61d2
-	sudo mount -t tmpfs -o rw,size=1G tmpfs src
-	sudo chmod 777 src
+	sudo mount -t tmpfs -o rw,size=1G tmpfs src/databases/market
+	sudo mount -t tmpfs -o rw,size=1G tmpfs src/databases/transactions
+	sudo chmod 777 src/databases/market
+	sudo chmod 777 src/databases/transactions
 	git pull
 
 swap-on:
