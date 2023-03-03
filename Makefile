@@ -12,16 +12,19 @@ install:
 	yes | sudo apt-get install inotify-tools borgbackup  docker.io
 	curl https://rclone.org/install.sh | sudo bash
 	sudo apt-get install --upgrade -y build-essential gdb lcov pkg-config libbz2-dev libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev libncurses5-dev libreadline-dev libsqlite3-dev libssl-dev lzma lzma-dev tk-dev uuid-dev # https://medium.com/@fsufitch/filips-awesome-overcomplicated-python-dev-environment-dd24ee2a009c
+	sudo apt-get install software-properties-common
+	sudo add-apt-repository ppa:deadsnakes/ppa
 	sudo apt-get install --upgrade python3 -y # check pyhton update
 	sudo apt-get install --upgrade python3-pip -y  # install pip
 	sudo ln -s /usr/bin/python3 /usr/local/bin/py # python3 to py
 	pip3 install black coverage flake8 mypy pylint pytest tox python-dotenv loguru numpy pandas dask pytest-asyncio
 	yes | sudo apt-get upgrade && sudo apt update
+	sudo apt-get install python3.11 # upgrade to python3.11
 	sudo apt-get clean
 
 ram-disk:
 #https://towardsdev.com/linux-create-a-ram-disk-to-speed-up-your-i-o-file-operations-18dcaede61d2
-	sudo mount -t tmpfs -o rw,size=2G tmpfs src
+	sudo mount -t tmpfs -o rw,size=1G tmpfs src
 	sudo chmod 777 src
 	git pull
 
