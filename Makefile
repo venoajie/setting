@@ -19,6 +19,7 @@ install:
 	sudo ln -s /usr/bin/python3 /usr/local/bin/py # python3 to py
 	pip3 install black coverage flake8 mypy pylint pytest tox python-dotenv loguru numpy pandas dask pytest-asyncio
 	yes | sudo apt-get upgrade && sudo apt update
+	sudo apt install wl-clipboard # perform "+y to yank from Neovim to your system clipboard
 	sudo apt-get install python3.11 # upgrade to python3.11
 	sudo apt-get clean
 
