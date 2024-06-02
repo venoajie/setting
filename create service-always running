@@ -24,3 +24,4 @@ WantedBy=multi-user.target
 #https://medium.com/codex/setup-a-python-script-as-a-service-through-systemctl-systemd-f0cc55a42267
 #https://stackoverflow.com/questions/35641414/python-import-of-local-module-failing-when-run-as-systemd-systemctl-service
 #https://www.redhat.com/sysadmin/systemd-automate-recovery
+#https://systemd-by-example.com
