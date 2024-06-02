@@ -1,11 +1,19 @@
 [Unit]
 Description=My app service
 After=multi-user.target
+
 [Service]
 Type=simple
 Restart=always
-ExecStart=/usr/bin/python3 /home/ubuntu/live/MyApp/src/recurring_transactions.py
-Environment="PYTHONPATH=$PYTHONPATH:/home/ubuntu/.local/lib/python3.8/site-packages"
+ExecStart=/usr/bin/python3 /home/ubuntu/live/MyApp/src/app
+WorkingDirectory=/home/ubuntu/live/MyApp/src
+User=ubuntu
+StandardOutput=null
+Restart=on-failure
+
+#ExecStart=/usr/bin/python3 /home/ubuntu/live/MyApp/src/recurring_transactions.py
+#Environment="PYTHONPATH=$PYTHONPATH:/home/ubuntu/.local/lib/python3.8/site-packages"
+
 [Install]
 WantedBy=multi-user.target
 
@@ -15,3 +23,4 @@ WantedBy=multi-user.target
 #https://medium.com/@benmorel/creating-a-linux-service-with-systemd-611b5c8b91d6
 #https://medium.com/codex/setup-a-python-script-as-a-service-through-systemctl-systemd-f0cc55a42267
 #https://stackoverflow.com/questions/35641414/python-import-of-local-module-failing-when-run-as-systemd-systemctl-service
+#https://www.redhat.com/sysadmin/systemd-automate-recovery
