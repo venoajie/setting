@@ -4,6 +4,7 @@ After=multi-user.target
 FailureAction=reboot
 StartLimitAction=reboot
 After=app.service
+#OnFailure=my-app-recovery.service
 
 [Service]
 Type=simple
