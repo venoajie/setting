@@ -1,0 +1,18 @@
+[Unit]
+Description=My app service
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/python3 /home/ubuntu/live/MyApp/src/app
+WorkingDirectory=/home/ubuntu/live/MyApp/src
+User=ubuntu
+StandardOutput=null
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
+# sudo vim /etc/systemd/system/my_app.service
+# sudo chmod +x /etc/systemd/system/my_app.service
