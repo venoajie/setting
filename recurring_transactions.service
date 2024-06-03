@@ -1,0 +1,18 @@
+[Unit]
+Description=Reurring transactions service
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/python3 /home/ubuntu/live/MyApp/src/recurring_transactions.py
+WorkingDirectory=/home/ubuntu/live/MyApp/src
+User=ubuntu
+StandardOutput=null
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
+# sudo vim /etc/systemd/system/recurring_transactions.service
+# sudo chmod +x /etc/systemd/system/recurring_transactions.service
