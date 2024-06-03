@@ -2,6 +2,7 @@
 Description=My app service
 After=multi-user.target
 FailureAction=reboot
+StartLimitAction=reboot
 
 [Service]
 Type=simple
