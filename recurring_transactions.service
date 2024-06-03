@@ -2,6 +2,7 @@
 Description=Reurring transactions service
 After=multi-user.target
 FailureAction=reboot
+After=app.service
 
 [Service]
 Type=simple
