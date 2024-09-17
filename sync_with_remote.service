@@ -1,0 +1,17 @@
+[Unit]
+Description=sync with remote
+After=multi-user.target
+FailureAction=reboot
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/sh /home/ubuntu/live/MyApp/src/sync_with_remote.sh
+WorkingDirectory=/home/ubuntu/live/MyApp/src
+User=ubuntu
+StandardOutput=null
+Restart=on-failure
+
+
+[Install]
+WantedBy=multi-user.target
