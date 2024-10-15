@@ -24,6 +24,18 @@ install:
 	sudo apt-get install python3.11 # upgrade to python3.11
 	sudo apt-get clean
 
+inst_psql:
+	sudo apt update
+	sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+	curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
+	sudo apt update
+	sudo apt install postgresql-17
+	psql --version
+	sudo systemctl start postgresql
+	sudo systemctl enable postgresql
+
+
+
 ram-disk:
 #https://towardsdev.com/linux-create-a-ram-disk-to-speed-up-your-i-o-file-operations-18dcaede61d2
 	sudo mount -t tmpfs -o rw,size=1G tmpfs src/databases/market
