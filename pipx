@@ -1,3 +1,5 @@
 https://www.reddit.com/r/Python/comments/16ipu0s/is_there_any_downsides_to_using_pipx/
 https://medium.com/@baraguantonyy/overcoming-python-package-installation-challenges-in-ubuntu-23-04-and-debian-a-guide-to-using-pipx-d0c93ee637ba
 https://www.omgubuntu.co.uk/2023/04/pip-install-error-externally-managed-environment-fix
+https://stackoverflow.com/questions/64217423/why-does-pip-list-not-work-correctly-within-a-virtual-environment-created-by-pip
+https://stackoverflow.com/questions/76499565/python-does-not-find-module-installed-with-pipx
