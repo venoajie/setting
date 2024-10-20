@@ -18,7 +18,7 @@ install:
 	sudo apt-get install --upgrade python3 -y # check pyhton update
 	sudo apt-get install --upgrade python3-pip -y  # install pip
 	sudo ln -s /usr/bin/python3 /usr/local/bin/py # python3 to py
-	pip3 install --upgrade pip3 black coverage flake8 mypy pylint pytest tox python-dotenv loguru numpy pandas dask pytest-asyncio websockets requests aiohttp aiosqlite aioschedule dataclassy orjson psutil cachetools
+	pip3 install --upgrade black coverage flake8 mypy pylint pytest tox python-dotenv loguru numpy pandas dask pytest-asyncio websockets requests aiohttp aiosqlite aioschedule dataclassy orjson psutil cachetools
 	yes | sudo apt-get upgrade && sudo apt update
 	sudo apt install wl-clipboard # perform "+y to yank from Neovim to your system clipboard
 	sudo apt-get install python3.11 # upgrade to python3.11
