@@ -27,6 +27,7 @@ install:
 	yes | sudo apt-get upgrade && sudo apt update
 	sudo apt install wl-clipboard # perform "+y to yank from Neovim to your system clipboard
 	sudo apt-get clean
+	git clone https://github.com/venoajie/MyApp.git
 
 inst_psql:
 	sudo apt update
