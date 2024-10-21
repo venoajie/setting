@@ -9,19 +9,23 @@ install:
 	sudo NEEDRESTART_MODE=a apt-get dist-upgrade --yes
 	sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
 	yes | sudo apt-get upgrade && sudo apt update
-	yes | sudo apt-get install inotify-tools borgbackup  docker.io
+	yes | sudo apt-get install inotify-tools sqlite3 borgbackup  docker.io
 	curl https://rclone.org/install.sh | sudo bash
 	sudo apt-get install --upgrade -y build-essential gdb lcov pkg-config libbz2-dev libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev libncurses5-dev libreadline-dev libsqlite3-dev libssl-dev lzma lzma-dev tk-dev uuid-dev # https://medium.com/@fsufitch/filips-awesome-overcomplicated-python-dev-environment-dd24ee2a009c
-	sudo apt-get install software-properties-common
-	sudo add-apt-repository ppa:deadsnakes/ppa
-	sudo apt install python3.8-venv
+	sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev 	# https://medium.com/@aashari/easy-to-follow-guide-of-how-to-install-pyenv-on-ubuntu-a3730af8d7f0
 	sudo apt-get install --upgrade python3 -y # check pyhton update
 	sudo apt-get install --upgrade python3-pip -y  # install pip
 	sudo ln -s /usr/bin/python3 /usr/local/bin/py # python3 to py
 	pip3 install --upgrade black coverage flake8 mypy pylint pytest tox python-dotenv loguru numpy pandas dask pytest-asyncio websockets requests aiohttp aiosqlite aioschedule dataclassy orjson psutil cachetools
+	yes | sudo apt install python3-dev
+	yes | sudo apt install python3-pip
+	yes | sudo apt install python3-venv
+	yes | sudo apt install python3-virtualenv	
+	yes | sudo apt-get upgrade && sudo apt update
+	python3 -m pip install --user pipx
+	python3 -m pipx ensurepath	
 	yes | sudo apt-get upgrade && sudo apt update
 	sudo apt install wl-clipboard # perform "+y to yank from Neovim to your system clipboard
-	sudo apt-get install python3.11 # upgrade to python3.11
 	sudo apt-get clean
 
 inst_psql:
