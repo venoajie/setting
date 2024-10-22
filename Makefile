@@ -10,7 +10,6 @@ install:
 	sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
 	yes | sudo apt-get upgrade && sudo apt update
 	yes | sudo apt-get install inotify-tools sqlite3 borgbackup  docker.io
-	curl https://rclone.org/install.sh | sudo bash
 	yes | sudo apt-get install --upgrade -y build-essential gdb lcov pkg-config libbz2-dev 
 	yes | sudo apt-get install --upgrade -y libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev libncurses5-dev libreadline-dev libsqlite3-dev libssl-dev lzma lzma-dev tk-dev uuid-dev # https://medium.com/@fsufitch/filips-awesome-overcomplicated-python-dev-environment-dd24ee2a009c
 	yes | sudo apt install --upgrade -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl 
@@ -33,6 +32,8 @@ install:
 	sudo apt-get clean
 	cd ..
 	git clone https://github.com/venoajie/MyApp.git
+	curl https://rclone.org/install.sh | sudo bash
+	yes | sudo apt-get upgrade && sudo apt update
 
 inst_psql:
 	sudo apt update
