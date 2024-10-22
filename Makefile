@@ -21,9 +21,11 @@ install:
 	yes | sudo apt install python3-pip
 	yes | sudo apt install python3-venv
 	yes | sudo apt install python3-virtualenv	
-	yes | sudo apt-get upgrade && sudo apt update
-	python3 -m pip install --user pipx
-	python3 -m pipx ensurepath	
+	yes | sudo apt-get upgrade && sudo apt 
+	yes | sudo apt install pipx
+	pipx ensurepath
+	#python3 -m pip install --user pipx
+	#python3 -m pipx ensurepath	
 	yes | sudo apt-get upgrade && sudo apt update
 	yes | sudo apt install wl-clipboard # perform "+y to yank from Neovim to your system clipboard
 	sudo apt-get clean
