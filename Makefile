@@ -11,8 +11,10 @@ install:
 	yes | sudo apt-get upgrade && sudo apt update
 	yes | sudo apt-get install inotify-tools sqlite3 borgbackup  docker.io
 	curl https://rclone.org/install.sh | sudo bash
-	sudo apt-get install --upgrade -y build-essential gdb lcov pkg-config libbz2-dev libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev libncurses5-dev libreadline-dev libsqlite3-dev libssl-dev lzma lzma-dev tk-dev uuid-dev # https://medium.com/@fsufitch/filips-awesome-overcomplicated-python-dev-environment-dd24ee2a009c
-	sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev 	# https://medium.com/@aashari/easy-to-follow-guide-of-how-to-install-pyenv-on-ubuntu-a3730af8d7f0
+	yes | sudo apt-get install --upgrade -y build-essential gdb lcov pkg-config libbz2-dev libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev libncurses5-dev libreadline-dev libsqlite3-dev libssl-dev lzma lzma-dev tk-dev uuid-dev # https://medium.com/@fsufitch/filips-awesome-overcomplicated-python-dev-environment-dd24ee2a009c
+	yes | sudo apt install --upgrade -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev 	# https://medium.com/@aashari/easy-to-follow-guide-of-how-to-install-pyenv-on-ubuntu-a3730af8d7f0
+	yes | sudo apt-get install --upgrade  libdigest-hmac-perl libgssapi-perl libcrypt-ssleay-perl libsub-name-perl libbusiness-isbn-perl libauthen-ntlm-perl libunicode-map8-perl libunicode-string-perl
+  xml-twig-tools nickle cairo-5c xorg-docs-core
 	sudo apt-get install --upgrade python3 -y # check pyhton update
 	sudo apt-get install --upgrade python3-pip -y  # install pip
 	sudo ln -s /usr/bin/python3 /usr/local/bin/py # python3 to py
@@ -27,6 +29,7 @@ install:
 	yes | sudo apt-get upgrade && sudo apt update
 	yes | sudo apt install wl-clipboard # perform "+y to yank from Neovim to your system clipboard
 	sudo apt-get clean
+	cd ..
 	git clone https://github.com/venoajie/MyApp.git
 
 inst_psql:
