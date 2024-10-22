@@ -28,13 +28,13 @@ install:
 	yes | sudo apt-get upgrade && sudo apt update
 	yes | sudo apt install wl-clipboard # perform "+y to yank from Neovim to your system clipboard
 	sudo apt-get clean
-	git clone https://github.com/venoajie/MyApp.git
+	git clone https://github.com/venoajie/App.git
 	curl https://rclone.org/install.sh | sudo bash
 	yes | sudo apt-get install --upgrade  -y libdigest-hmac-perl libgssapi-perl libcrypt-ssleay-perl libsub-name-perl 
 	yes | sudo apt-get install --upgrade  -y libbusiness-isbn-perl libauthen-ntlm-perl libunicode-map8-perl libunicode-string-perl xml-twig-tools nickle cairo-5c xorg-docs-core
 	yes | sudo apt-get install --upgrade  -y libgd-barcode-perl librsvg2-bin xorg-docs
 	yes | sudo apt-get upgrade && sudo apt update
-	mv MyApp ..
+	mv App ..
 	sudo reboot
 
 inst_psql:
