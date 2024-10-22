@@ -22,8 +22,6 @@ install:
 	yes | sudo apt install python3-venv
 	yes | sudo apt install python3-virtualenv	
 	yes | sudo apt-get upgrade && sudo apt 
-	yes | sudo apt install pipx
-	pipx ensurepath
 	#python3 -m pip install --user pipx
 	#python3 -m pipx ensurepath	
 	yes | sudo apt-get upgrade && sudo apt update
@@ -40,8 +38,10 @@ install:
 	curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
 	sudo apt update
 	sudo apt install postgresql-17
-	python3 -m venv .venv
 	sudo systemctl enable postgresql
+	python3 -m venv .venv
+	sudo apt install pipx
+	pipx ensurepath
 	sudo reboot
 
 inst_psql:
