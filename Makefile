@@ -8,37 +8,35 @@ help:
 install:
 	sudo NEEDRESTART_MODE=a apt-get dist-upgrade --yes
 	sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
-	yes | sudo apt-get upgrade && sudo apt update
-	yes | sudo apt-get install inotify-tools sqlite3 borgbackup  docker.io
-	yes | sudo apt-get install --upgrade -y build-essential gdb lcov pkg-config libbz2-dev 
-	yes | sudo apt-get install --upgrade -y libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev libncurses5-dev libreadline-dev libsqlite3-dev libssl-dev lzma lzma-dev tk-dev uuid-dev # https://medium.com/@fsufitch/filips-awesome-overcomplicated-python-dev-environment-dd24ee2a009c
+	yes | sudo apt upgrade && sudo apt update
+	yes | sudo apt install inotify-tools sqlite3 borgbackup  docker.io
+	yes | sudo apt install --upgrade -y build-essential gdb lcov pkg-config libbz2-dev 
+	yes | sudo apt install --upgrade -y libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev libncurses5-dev libreadline-dev libsqlite3-dev libssl-dev lzma lzma-dev tk-dev uuid-dev # https://medium.com/@fsufitch/filips-awesome-overcomplicated-python-dev-environment-dd24ee2a009c
 	yes | sudo apt install --upgrade -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl 
 	yes | sudo apt install --upgrade -y llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev 	# https://medium.com/@aashari/easy-to-follow-guide-of-how-to-install-pyenv-on-ubuntu-a3730af8d7f0
-	yes | sudo apt-get install --upgrade python3-pip -y  # install pip
+	yes | sudo apt install --upgrade python3-pip -y  # install pip
 	sudo ln -s /usr/bin/python3 /usr/local/bin/py # python3 to py
 	#pip3 install --upgrade black coverage flake8 mypy pylint pytest tox python-dotenv loguru numpy pandas dask pytest-asyncio websockets requests aiohttp aiosqlite aioschedule dataclassy orjson psutil cachetools
 	yes | sudo apt install python3-dev
 	yes | sudo apt install python3-pip
 	yes | sudo apt install python3-venv
 	yes | sudo apt install python3-virtualenv	
-	yes | sudo apt-get upgrade && sudo apt 
 	#python3 -m pip install --user pipx
 	#python3 -m pipx ensurepath	
-	yes | sudo apt-get upgrade && sudo apt update
+	yes | sudo apt upgrade && sudo apt update
 	yes | sudo apt install wl-clipboard # perform "+y to yank from Neovim to your system clipboard
-	sudo apt-get clean
 	git clone https://github.com/venoajie/App.git
 	curl https://rclone.org/install.sh | sudo bash
 	yes | sudo apt-get install --upgrade  -y libdigest-hmac-perl libgssapi-perl libcrypt-ssleay-perl libsub-name-perl 
 	yes | sudo apt-get install --upgrade  -y libbusiness-isbn-perl libauthen-ntlm-perl libunicode-map8-perl libunicode-string-perl xml-twig-tools nickle cairo-5c xorg-docs-core
 	yes | sudo apt-get install --upgrade  -y libgd-barcode-perl librsvg2-bin xorg-docs
-	yes | sudo apt-get upgrade && sudo apt update
 	mv App ..
 	sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 	curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
-	sudo apt update
 	sudo apt install postgresql-17
+	sudo apt-get clean
 	sudo systemctl enable postgresql
+	yes | sudo apt-get upgrade && sudo apt update
 	python3 -m venv .venv
 	sudo apt install pipx
 	pipx ensurepath
