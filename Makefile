@@ -14,10 +14,9 @@ install:
 	yes | sudo apt-get install --upgrade -y libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev libncurses5-dev libreadline-dev libsqlite3-dev libssl-dev lzma lzma-dev tk-dev uuid-dev # https://medium.com/@fsufitch/filips-awesome-overcomplicated-python-dev-environment-dd24ee2a009c
 	yes | sudo apt install --upgrade -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl 
 	yes | sudo apt install --upgrade -y llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev 	# https://medium.com/@aashari/easy-to-follow-guide-of-how-to-install-pyenv-on-ubuntu-a3730af8d7f0
-	sudo apt-get install --upgrade python3 -y # check pyhton update
-	sudo apt-get install --upgrade python3-pip -y  # install pip
+	yes | sudo apt-get install --upgrade python3-pip -y  # install pip
 	sudo ln -s /usr/bin/python3 /usr/local/bin/py # python3 to py
-	pip3 install --upgrade black coverage flake8 mypy pylint pytest tox python-dotenv loguru numpy pandas dask pytest-asyncio websockets requests aiohttp aiosqlite aioschedule dataclassy orjson psutil cachetools
+	#pip3 install --upgrade black coverage flake8 mypy pylint pytest tox python-dotenv loguru numpy pandas dask pytest-asyncio websockets requests aiohttp aiosqlite aioschedule dataclassy orjson psutil cachetools
 	yes | sudo apt install python3-dev
 	yes | sudo apt install python3-pip
 	yes | sudo apt install python3-venv
@@ -35,6 +34,12 @@ install:
 	yes | sudo apt-get install --upgrade  -y libgd-barcode-perl librsvg2-bin xorg-docs
 	yes | sudo apt-get upgrade && sudo apt update
 	mv App ..
+	sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+	curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
+	sudo apt update
+	sudo apt install postgresql-17
+	python3 -m venv .venv
+	sudo systemctl enable postgresql
 	sudo reboot
 
 inst_psql:
