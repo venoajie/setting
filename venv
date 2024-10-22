@@ -1,0 +1,17 @@
+https://medium.com/@ccpythonprogramming/why-and-how-to-use-virtual-environments-in-python-f08b994b6854
+
+import os
+import subprocess
+
+def create_virtualenv(directory, env_name):
+    result = subprocess.run(['python3', '-m', 'venv', os.path.join(directory, env_name)], capture_output=True, text=True)
+    return result.stdout
+
+def activate_virtualenv(env_name):
+    activate_script = os.path.join(env_name, 'bin', 'activate')
+    os.system(f'source {activate_script}')
+
+directory = '/path/to/your/python/project'
+env_name = 'venv'
+create_virtualenv(directory, env_name)
+activate_virtualenv(env_name)
