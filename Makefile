@@ -25,7 +25,7 @@ install:
 	python3 -m pip install --user pipx
 	python3 -m pipx ensurepath	
 	yes | sudo apt-get upgrade && sudo apt update
-	sudo apt install wl-clipboard # perform "+y to yank from Neovim to your system clipboard
+	yes | sudo apt install wl-clipboard # perform "+y to yank from Neovim to your system clipboard
 	sudo apt-get clean
 	git clone https://github.com/venoajie/MyApp.git
 
