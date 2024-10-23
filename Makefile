@@ -33,6 +33,7 @@ install:
 	sudo curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc
 	sudo sh -c 'echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 	yes | sudo apt update
+	uv venv
 	yes | sudo apt -y install postgresql	
 	sudo apt-get clean
 	yes | sudo apt-get upgrade && sudo apt update
