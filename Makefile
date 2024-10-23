@@ -26,16 +26,18 @@ install:
 	yes | sudo apt install --upgrade  -y libdigest-hmac-perl libgssapi-perl libcrypt-ssleay-perl libsub-name-perl 
 	yes | sudo apt install --upgrade  -y libbusiness-isbn-perl libauthen-ntlm-perl libunicode-map8-perl libunicode-string-perl xml-twig-tools nickle cairo-5c xorg-docs-core
 	yes | sudo apt install --upgrade  -y libgd-barcode-perl librsvg2-bin xorg-docs
-	mv App ..
-	sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-	curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
-	yes | sudo apt install postgresql-17
+	mv App 
+	yes | sudo apt install curl ca-certificates
+	sudo install -d /usr/share/postgresql-common/pgdg
+	sudo curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc
+	sudo sh -c 'echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+	yes | sudo apt update
+	yes | sudo apt -y install postgresql	
 	sudo apt-get clean
 	yes | sudo apt-get upgrade && sudo apt update
 	sudo systemctl enable postgresql
-	python3 -m venv .venv
-	yes | sudo apt install pipx
-	pipx ensurepath
+	#python3 -m venv .venv
+	uv venv
 	sudo reboot
 	#python3 -m pip install --user pipx
 	#python3 -m pipx ensurepath	
