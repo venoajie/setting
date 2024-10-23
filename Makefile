@@ -28,21 +28,10 @@ install:
 	yes | sudo apt install --upgrade  -y libbusiness-isbn-perl libauthen-ntlm-perl libunicode-map8-perl libunicode-string-perl xml-twig-tools nickle cairo-5c xorg-docs-core
 	yes | sudo apt install --upgrade  -y libgd-barcode-perl librsvg2-bin xorg-docs
 	mv App ..
-	yes | sudo apt install curl ca-certificates
-	sudo install -d /usr/share/postgresql-common/pgdg
-	sudo curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc
-	sudo sh -c 'echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-	yes | sudo apt update
-	uv venv
-	yes | sudo apt -y install postgresql	
+	yes | sudo apt install postgresql	
 	sudo apt-get clean
 	yes | sudo apt-get upgrade && sudo apt update
-	sudo systemctl enable postgresql
-	#python3 -m venv .venv
-	uv venv
 	sudo reboot
-	#python3 -m pip install --user pipx
-	#python3 -m pipx ensurepath	
 	#pip3 install --upgrade black coverage flake8 mypy pylint pytest tox python-dotenv loguru numpy pandas dask pytest-asyncio websockets requests aiohttp aiosqlite aioschedule dataclassy orjson psutil cachetools
 
 inst_psql:
