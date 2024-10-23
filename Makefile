@@ -23,6 +23,7 @@ install:
 	curl https://rclone.org/install.sh | sudo bash
 	curl -LsSf https://astral.sh/uv/install.sh | sh # https://samedwardes.com/blog/2024-04-21-python-uv-workflow/
 	#https://levelup.gitconnected.com/python-dependency-war-uv-vs-pip-86762c37fcab	
+	#https://medium.com/bitgrit-data-science-publication/forget-pip-install-use-this-instead-754863c58f1e
 	yes | sudo apt install --upgrade  -y libdigest-hmac-perl libgssapi-perl libcrypt-ssleay-perl libsub-name-perl 
 	yes | sudo apt install --upgrade  -y libbusiness-isbn-perl libauthen-ntlm-perl libunicode-map8-perl libunicode-string-perl xml-twig-tools nickle cairo-5c xorg-docs-core
 	yes | sudo apt install --upgrade  -y libgd-barcode-perl librsvg2-bin xorg-docs
