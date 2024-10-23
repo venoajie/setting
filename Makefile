@@ -27,7 +27,7 @@ install:
 	yes | sudo apt install --upgrade  -y libdigest-hmac-perl libgssapi-perl libcrypt-ssleay-perl libsub-name-perl 
 	yes | sudo apt install --upgrade  -y libbusiness-isbn-perl libauthen-ntlm-perl libunicode-map8-perl libunicode-string-perl xml-twig-tools nickle cairo-5c xorg-docs-core
 	yes | sudo apt install --upgrade  -y libgd-barcode-perl librsvg2-bin xorg-docs
-	mv App 
+	mv App ..
 	yes | sudo apt install curl ca-certificates
 	sudo install -d /usr/share/postgresql-common/pgdg
 	sudo curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc
