@@ -36,7 +36,8 @@ inst_tools:
 	yes | sudo apt install inotify-tools  borgbackup  docker.io
 	yes | sudo apt install --upgrade wl-clipboard # perform "+y to yank from Neovim to your system clipboard
 	curl https://rclone.org/install.sh | sudo bash
-	curl -LsSf https://astral.sh/uv/install.sh | sh # https://samedwardes.com/blog/2024-04-21-python-uv-workflow/
+	curl -LsSf https://astral.sh/uv/install.sh | sh
+	alias uvinit='source .venv/bin/activate' # https://samedwardes.com/blog/2024-04-21-python-uv-workflow/
 	#https://levelup.gitconnected.com/python-dependency-war-uv-vs-pip-86762c37fcab	
 	#https://medium.com/bitgrit-data-science-publication/forget-pip-install-use-this-instead-754863c58f1e
 
