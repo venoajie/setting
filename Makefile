@@ -23,5 +23,5 @@ inst_tools:
 	curl -LsSf https://astral.sh/uv/install.sh | sh
 
 inst_sql:
-	yes | sudo apt install postgresql sqlite
+	yes | sudo yum install postgresql sqlite
 	yes | sudo dnf upgrade && sudo dnf update
