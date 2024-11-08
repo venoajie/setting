@@ -12,7 +12,7 @@ inst_basics:
 	yes | sudo dnf upgrade && sudo dnf update
 
 inst_python:
-	yes | sudo dnf install --upgrade python3-pip -y  # install pip
+	yes | sudo dnf install python3-pip -y  # install pip
 
 inst_projects:
 	git clone https://github.com/venoajie/App.git
@@ -24,4 +24,4 @@ inst_tools:
 
 inst_sql:
 	yes | sudo apt install postgresql sqlite3	
-	yes | sudo apt-get upgrade && sudo apt update
+	yes | sudo dnf upgrade && sudo dnf update
