@@ -10,6 +10,8 @@ install:  inst_basics inst_python inst_projects inst_tools inst_sql
 
 inst_basics:
 	yes | sudo dnf upgrade && sudo dnf update
+	dnf config-manager --enable ol8_developer_EPEL
+
 
 inst_python:
 	yes | sudo dnf install python3-pip -y  # install pip
