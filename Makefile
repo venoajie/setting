@@ -48,6 +48,24 @@ inst_sql:
 	sudo apt-get clean
 	#sudo reboot
 
+activate_service:
+
+	sudo systemctl daemon-reload
+
+	sudo chmod +x /etc/systemd/system/sync_with_remote.service
+	sudo systemctl enable sync_with_remote.service
+	sudo systemctl start sync_with_remote.service
+
+	sudo chmod +x /etc/systemd/system/general_tasks.service
+	sudo systemctl enable general_tasks.service
+	sudo systemctl start general_tasks.service
+	
+	sudo chmod +x /etc/systemd/system/streaming.service
+	sudo systemctl enable streaming.service
+	sudo systemctl start streaming.service
+
+	sudo chmod +x /etc/systemd/system/app.service
+	sudo systemctl enable app.service
 
 inst_dot:
 	git clone https://github.com/venoajie/App.git
