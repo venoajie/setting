@@ -47,7 +47,7 @@ inst_sql:
 	yes | sudo apt install postgresql sqlite3	
 	yes | sudo apt-get upgrade && sudo apt update
 	sudo apt-get clean
-	sudo reboot
+	#sudo reboot
 
 
 inst_dot:
