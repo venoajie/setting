@@ -18,7 +18,7 @@ inst_basics:
 	yes | sudo apt install --upgrade -y llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev 	# https://medium.com/@aashari/easy-to-follow-guide-of-how-to-install-pyenv-on-ubuntu-a3730af8d7f0
 	yes | sudo apt install --upgrade  -y libdigest-hmac-perl libgssapi-perl libcrypt-ssleay-perl libsub-name-perl 
 	yes | sudo apt install --upgrade  -y libbusiness-isbn-perl libauthen-ntlm-perl libunicode-map8-perl libunicode-string-perl xml-twig-tools nickle cairo-5c xorg-docs-core
-	yes | sudo apt install --upgrade  -y libgd-barcode-perl librsvg2-bin xorg-docs  
+	yes | sudo apt install --upgrade  -y libgd-barcode-perl librsvg2-bin xorg-docs  linux-image-oracle
 	yes | sudo ethtool -G ens3 tx 513 && sudo ethtool -G ens3 tx 512
 	yes | sudo apt-get upgrade && sudo apt update
 
