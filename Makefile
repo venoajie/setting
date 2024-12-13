@@ -34,7 +34,7 @@ inst_projects:
 	mv App ..
 
 inst_tools:	
-	yes | sudo apt-get upgrade && sudo apt 
+	yes | sudo apt upgrade && sudo apt update
 	yes | sudo apt install inotify-tools  borgbackup  docker.io
 	yes | sudo apt install --upgrade wl-clipboard # perform "+y to yank from Neovim to your system clipboard
 	curl https://rclone.org/install.sh | sudo bash
