@@ -66,6 +66,8 @@ activate_service:
 
 	sudo chmod +x /etc/systemd/system/app.service
 	sudo systemctl enable app.service
+	
+	mv service ..
 
 inst_dot:
 	git clone https://github.com/venoajie/App.git
