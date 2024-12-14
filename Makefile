@@ -56,9 +56,9 @@ activate_service:
 	sudo systemctl enable sync_with_remote.service
 	sudo systemctl start sync_with_remote.service
 
-	sudo chmod +x /etc/systemd/system/general_tasks.service
-	sudo systemctl enable general_tasks.service
-	sudo systemctl start general_tasks.service
+	sudo chmod +x /etc/systemd/system/general.service
+	sudo systemctl enable general.service
+	sudo systemctl start general.service
 	
 	sudo chmod +x /etc/systemd/system/streaming.service
 	sudo systemctl enable streaming.service
