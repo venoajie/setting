@@ -19,7 +19,7 @@ inst_basics:
 	yes | sudo apt install --upgrade  -y libdigest-hmac-perl libgssapi-perl libcrypt-ssleay-perl libsub-name-perl 
 	yes | sudo apt install --upgrade  -y libbusiness-isbn-perl libauthen-ntlm-perl libunicode-map8-perl libunicode-string-perl xml-twig-tools nickle cairo-5c xorg-docs-core
 	yes | sudo apt install --upgrade  -y libgd-barcode-perl librsvg2-bin xorg-docs  linux-image-oracle
-	yes | sudo ethtool -G ens3 tx 513 && sudo ethtool -G ens3 tx 512
+	#yes | sudo ethtool -G ens3 tx 513 && sudo ethtool -G ens3 tx 512
 	yes | sudo apt-get upgrade && sudo apt update
 
 inst_python:
