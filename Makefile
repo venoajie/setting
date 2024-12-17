@@ -5,7 +5,7 @@ help:
 	@echo "ram-disk - resize ram disk (default = 2 GB)"
 
 
-install:  inst_basics inst_python inst_projects inst_tools inst_sql 
+install:  inst_basics inst_python inst_projects inst_tools inst_sql inst_oci
 
 
 inst_basics:
@@ -19,7 +19,6 @@ inst_basics:
 	yes | sudo apt install --upgrade  -y libdigest-hmac-perl libgssapi-perl libcrypt-ssleay-perl libsub-name-perl 
 	yes | sudo apt install --upgrade  -y libbusiness-isbn-perl libauthen-ntlm-perl libunicode-map8-perl libunicode-string-perl xml-twig-tools nickle cairo-5c xorg-docs-core
 	yes | sudo apt install --upgrade  -y libgd-barcode-perl librsvg2-bin xorg-docs  linux-image-oracle
-	#yes | sudo ethtool -G ens3 tx 513 && sudo ethtool -G ens3 tx 512
 	yes | sudo apt-get upgrade && sudo apt update
 
 inst_python:
@@ -47,6 +46,14 @@ inst_sql:
 	yes | sudo apt-get upgrade && sudo apt update
 	sudo apt-get clean
 	#sudo reboot
+
+
+inst_oci:
+
+	bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh --accept-all-defaults)" 
+	exec -l $SHELL
+	# https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm#InstallingCLI__linux_and_unix
+	# directory: cd /home/ubuntu/.oci
 
 activate_service:
 
