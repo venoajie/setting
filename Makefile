@@ -40,6 +40,7 @@ inst_tools:
 	# https://samedwardes.com/blog/2024-04-21-python-uv-workflow/
 	#https://levelup.gitconnected.com/python-dependency-war-uv-vs-pip-86762c37fcab	
 	#https://medium.com/bitgrit-data-science-publication/forget-pip-install-use-this-instead-754863c58f1e
+	# https://medium.com/@gnetkov/start-using-uv-python-package-manager-for-better-dependency-management-183e7e428760
 
 inst_sql:
 	yes | sudo apt install postgresql sqlite3	
