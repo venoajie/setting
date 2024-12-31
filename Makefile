@@ -53,6 +53,7 @@ inst_oci:
 
 	bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh --accept-all-defaults)" 
 	exec -l $SHELL
+	source $HOME/.local/bin/env bash
 	# https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm#InstallingCLI__linux_and_unix
 	# directory: cd /home/ubuntu/.oci
 
