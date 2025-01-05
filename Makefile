@@ -18,13 +18,14 @@ inst_basics:
 	yes | sudo apt install --upgrade -y llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev 	# https://medium.com/@aashari/easy-to-follow-guide-of-how-to-install-pyenv-on-ubuntu-a3730af8d7f0
 	yes | sudo apt install --upgrade  -y libdigest-hmac-perl libgssapi-perl libcrypt-ssleay-perl libsub-name-perl 
 	yes | sudo apt install --upgrade  -y libbusiness-isbn-perl libauthen-ntlm-perl libunicode-map8-perl libunicode-string-perl xml-twig-tools nickle cairo-5c xorg-docs-core
-	yes | sudo apt install --upgrade  -y libgd-barcode-perl librsvg2-bin xorg-docs  linux-image-oracle
+	yes | sudo apt install --upgrade  -y libgd-barcode-perl librsvg2-bin xorg-docs  linux-image- 
 	yes | sudo apt-get upgrade && sudo apt update
 
 inst_python:
 	yes | sudo apt install --upgrade python3-pip -y  # install pip
 	sudo ln -s /usr/bin/python3 /usr/local/bin/py # python3 to py
-	yes | sudo apt install python3-dev python3-pip python3-venv python3-virtualenv
+	yes | sudo apt install python3-dev python3-pip python3-venv python3-virtualenv pipx
+	pipx install dotlink
 	yes | sudo apt upgrade && sudo apt update
 
 inst_projects:
