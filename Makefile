@@ -71,10 +71,6 @@ activate_service:
 	sudo systemctl enable general.service
 	sudo systemctl start general.service
 	
-	sudo chmod +x /etc/systemd/system/streaming.service
-	sudo systemctl enable streaming.service
-	sudo systemctl start streaming.service
-
 	sudo chmod +x /etc/systemd/system/app.service
 	sudo systemctl enable app.service
 	
