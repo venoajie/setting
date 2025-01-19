@@ -5,7 +5,7 @@ help:
 	@echo "ram-disk - resize ram disk (default = 2 GB)"
 
 
-install:  inst_basics inst_python inst_projects inst_tools inst_sql inst_oci
+install:  inst_basics inst_python inst_projects inst_tools inst_oci #inst_sql 
 
 
 inst_basics:
