@@ -34,7 +34,7 @@ inst_projects:
 
 inst_tools:	
 	yes | sudo apt upgrade && sudo apt update
-	yes | sudo apt install inotify-tools  borgbackup  docker.io
+	yes | sudo apt install inotify-tools  borgbackup  docker. redis-server
 	yes | sudo apt install --upgrade wl-clipboard # perform "+y to yank from Neovim to your system clipboard
 	curl https://rclone.org/install.sh | sudo bash
 	curl -LsSf https://astral.sh/uv/install.sh | sh
