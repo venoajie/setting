@@ -24,7 +24,7 @@ inst_basics:
 inst_python:
 	yes | sudo apt install --upgrade python3-pip -y  # install pip
 	sudo ln -s /usr/bin/python3 /usr/local/bin/py # python3 to py
-	yes | sudo apt install python3-dev python3-pip python3-venv python3-virtualenv pipx
+	yes | sudo apt install python3-dev python3-pip python3-venv python3-virtualenv pipx python3-setuptools
 	pipx install dotlink
 	yes | sudo apt upgrade && sudo apt update
 
