@@ -34,10 +34,11 @@ inst_projects:
 
 inst_tools:	
 	yes | sudo apt upgrade && sudo apt update
-	yes | sudo apt install inotify-tools  borgbackup  docker.io redis-server
+	yes | sudo apt install docker.io redis-server
 	yes | sudo apt install --upgrade wl-clipboard # perform "+y to yank from Neovim to your system clipboard
 	curl https://rclone.org/install.sh | sudo bash
 	curl -LsSf https://astral.sh/uv/install.sh | sh
+	
 	# https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-20-04
 	# https://samedwardes.com/blog/2024-04-21-python-uv-workflow/
 	#https://levelup.gitconnected.com/python-dependency-war-uv-vs-pip-86762c37fcab	
