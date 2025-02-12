@@ -34,7 +34,7 @@ inst_projects:
 
 inst_tools:	
 	yes | sudo apt upgrade && sudo apt update
-	yes | sudo apt install docker.io redis-server
+	yes | sudo apt install docker.io redis-server btop
 	sudo chmod 666 /var/run/docker.sock
 	yes | sudo apt install --upgrade wl-clipboard # perform "+y to yank from Neovim to your system clipboard
 	curl https://rclone.org/install.sh | sudo bash
@@ -49,8 +49,8 @@ inst_tools:
 inst_sql:
 	yes | sudo apt install postgresql sqlite3	
 	yes | sudo apt-get upgrade && sudo apt update
-	sudo apt-get clean
 	#sudo reboot
+	sudo apt-get clean
 
 
 inst_oci:
