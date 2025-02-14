@@ -1,9 +1,3 @@
-help:
-	@echo "install - install dependencies and requirements"
-	@echo "swap-on - allocate swap"
-	@echo "save-git-credential - save git credential"
-	@echo "ram-disk - resize ram disk (default = 2 GB)"
-
 
 install:  inst_basics inst_python inst_projects inst_tools inst_oci #inst_sql 
 
@@ -70,10 +64,6 @@ activate_service:
 	sudo systemctl enable sync_with_remote.service
 	sudo systemctl start sync_with_remote.service
 
-	sudo chmod +x /etc/systemd/system/general.service
-	sudo systemctl enable general.service
-	sudo systemctl start general.service
-	
 	sudo chmod +x /etc/systemd/system/app.service
 	sudo systemctl enable app.service
 	
