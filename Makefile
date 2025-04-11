@@ -35,6 +35,7 @@ inst_tools:
 	yes | sudo apt install docker.io redis-server btop
 	yes | sudo apt install rabbitmq-server
 	yes | sudo rabbitmq-plugins enable rabbitmq_management
+	sudo systemctl enable rabbitmq-server && sudo systemctl start rabbitmq-server
 	sudo chmod 666 /var/run/docker.sock
 	yes | sudo apt install --upgrade wl-clipboard # perform "+y to yank from Neovim to your system clipboard
 	curl https://rclone.org/install.sh | sudo bash
@@ -46,7 +47,7 @@ inst_tools:
 	# https://levelup.gitconnected.com/python-dependency-war-uv-vs-pip-86762c37fcab	
 	# https://medium.com/bitgrit-data-science-publication/forget-pip-install-use-this-instead-754863c58f1e
 	# https://medium.com/@gnetkov/start-using-uv-python-package-manager-for-better-dependency-management-183e7e428760
-
+	# https://hostman.com/tutorials/task-queues-with-celery-and-rabbitmq/
 # Install SQL databases
 inst_sql:
 	yes | sudo apt install postgresql sqlite3	
