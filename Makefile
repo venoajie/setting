@@ -1,20 +1,10 @@
-install:  inst_basics inst_python inst_projects inst_tools inst_oci save-git-credential#inst_sql 
+install:  inst-basics inst_python inst_projects inst_tools inst_oci save-git-credential#inst_sql 
 
 # Update and upgrade system packages
-inst_basics:
+inst-basics:
 	sudo NEEDRESTART_MODE=a apt-get dist-upgrade --yes
 	sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
-	yes | sudo apt upgrade && sudo apt update
-	# Install essential build tools and libraries
-	yes | sudo apt install --upgrade -y build-essential gdb lcov pkg-config libbz2-dev 
-	yes | sudo apt install --upgrade -y libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev libncurses5-dev libreadline-dev libsqlite3-dev libssl-dev lzma lzma-dev tk-dev uuid-dev
-	yes | sudo apt install --upgrade -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl 
-	yes | sudo apt install --upgrade -y llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-	# Install Perl libraries
-	yes | sudo apt install --upgrade  -y libdigest-hmac-perl libgssapi-perl libcrypt-ssleay-perl libsub-name-perl 
-	yes | sudo apt install --upgrade  -y libbusiness-isbn-perl libauthen-ntlm-perl libunicode-map8-perl libunicode-string-perl xml-twig-tools nickle cairo-5c xorg-docs-core
-	yes | sudo apt install --upgrade  -y libgd-barcode-perl librsvg2-bin xorg-docs  linux-image- 
-	yes | sudo apt-get upgrade && sudo apt update
+	yes | sudo apt upgrade && sudo apt Update
 
 # Install Python and related tools
 inst_python:
@@ -40,6 +30,7 @@ inst_tools:
 	yes | sudo apt install --upgrade wl-clipboard # perform "+y to yank from Neovim to your system clipboard
 	curl https://rclone.org/install.sh | sudo bash
 	curl -LsSf https://astral.sh/uv/install.sh | sh
+	dotlink https://github.com/venoajie/dotfiles.git
 	
 	# Additional references for tools installation
 	# https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-20-04
@@ -48,6 +39,7 @@ inst_tools:
 	# https://medium.com/bitgrit-data-science-publication/forget-pip-install-use-this-instead-754863c58f1e
 	# https://medium.com/@gnetkov/start-using-uv-python-package-manager-for-better-dependency-management-183e7e428760
 	# https://hostman.com/tutorials/task-queues-with-celery-and-rabbitmq/
+
 # Install SQL databases
 inst_sql:
 	yes | sudo apt install postgresql sqlite3	
@@ -60,10 +52,13 @@ inst_oci:
 	bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh --accept-all-defaults)" 
 	exec -l $SHELL
 	source $HOME/.local/bin/env # Add the CLI to your PATH 
-	dotlink https://github.com/venoajie/dotfiles.git
 	git config --global credential.helper store
 	# https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm#InstallingCLI__linux_and_unix
 	# directory: cd /home/ubuntu/.oci
+
+# Save Git credentials globally
+save-git-credential:
+	git config --global credential.helper store
 
 # Activate systemd services
 activate_service:
@@ -109,6 +104,17 @@ swap-on:
 	echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 	sudo reboot                    
 
-# Save Git credentials globally
-save-git-credential:
-	git config --global credential.helper store
+inst_non_basics:
+	sudo NEEDRESTART_MODE=a apt-get dist-upgrade --yes
+	sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
+	yes | sudo apt upgrade && sudo apt update
+	# Install essential build tools and libraries
+	yes | sudo apt install --upgrade -y build-essential gdb lcov pkg-config libbz2-dev 
+	yes | sudo apt install --upgrade -y libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev libncurses5-dev libreadline-dev libsqlite3-dev libssl-dev lzma lzma-dev tk-dev uuid-dev
+	yes | sudo apt install --upgrade -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl 
+	yes | sudo apt install --upgrade -y llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+	# Install Perl libraries
+	yes | sudo apt install --upgrade  -y libdigest-hmac-perl libgssapi-perl libcrypt-ssleay-perl libsub-name-perl 
+	yes | sudo apt install --upgrade  -y libbusiness-isbn-perl libauthen-ntlm-perl libunicode-map8-perl libunicode-string-perl xml-twig-tools nickle cairo-5c xorg-docs-core
+	yes | sudo apt install --upgrade  -y libgd-barcode-perl librsvg2-bin xorg-docs  linux-image- 
+	yes | sudo apt-get upgrade && sudo apt update
