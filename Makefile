@@ -19,6 +19,7 @@ inst_projects:
 	git clone https://github.com/venoajie/App.git
 	mv App ..
 
+
 # Install various tools and utilities
 inst_tools:	
 	yes | sudo apt upgrade && sudo apt update
@@ -31,14 +32,17 @@ inst_tools:
 	curl https://rclone.org/install.sh | sudo bash
 	curl -LsSf https://astral.sh/uv/install.sh | sh
 	dotlink https://github.com/venoajie/dotfiles.git
-	
-	# Additional references for tools installation
-	# https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-20-04
-	# https://samedwardes.com/blog/2024-04-21-python-uv-workflow/
-	# https://levelup.gitconnected.com/python-dependency-war-uv-vs-pip-86762c37fcab	
-	# https://medium.com/bitgrit-data-science-publication/forget-pip-install-use-this-instead-754863c58f1e
-	# https://medium.com/@gnetkov/start-using-uv-python-package-manager-for-better-dependency-management-183e7e428760
-	# https://hostman.com/tutorials/task-queues-with-celery-and-rabbitmq/
+	sudo usermod -aG docker $USER #Add current user to docker group
+	sudo chown $USER /var/run/docker.sock #Change the permissions of docker socket to be able to connect to the docker daemon
+
+# Additional references for tools installation
+# https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-20-04
+# https://samedwardes.com/blog/2024-04-21-python-uv-workflow/
+# https://levelup.gitconnected.com/python-dependency-war-uv-vs-pip-86762c37fcab	
+# https://medium.com/bitgrit-data-science-publication/forget-pip-install-use-this-instead-754863c58f1e
+# https://medium.com/@gnetkov/start-using-uv-python-package-manager-for-better-dependency-management-183e7e428760
+# https://hostman.com/tutorials/task-queues-with-celery-and-rabbitmq/
+# https://stackoverflow.com/questions/48957195/how-to-fix-docker-permission-denied
 
 # Install SQL databases
 inst_sql:
