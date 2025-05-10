@@ -57,6 +57,9 @@ inst_oci:
 	exec -l $SHELL
 	source $HOME/.local/bin/env # Add the CLI to your PATH 
 	git config --global credential.helper store
+	sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 8501 -j ACCEPT
+	sudo netfilter-persistent save
+	# https://www.reddit.com/r/oraclecloud/comments/r8lkf7/a_quick_tips_to_people_who_are_having_issue/
 	# https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm#InstallingCLI__linux_and_unix
 	# directory: cd /home/ubuntu/.oci
 
