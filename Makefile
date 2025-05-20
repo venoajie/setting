@@ -68,10 +68,11 @@ inst_terraform:
 	# https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-terraform-on-ubuntu-20-04
 	yes | sudo apt install unzip
 	yes | sudo apt install wget
-	wget https://releases.hashicorp.com/terraform/1.6.0/terraform_1.6.0_linux_amd64.zip
-	unzip terraform_1.6.0_linux_amd64.zip
+	wget https://releases.hashicorp.com/terraform/1.12.0/terraform_1.12.0_linux_arm64.zip
+	unzip terraform_1.12.0_linux_arm64.zip
 	sudo mv terraform /usr/local/bin/
-	rm terraform_1.6.0_linux_amd64.zip
+	rm terraform_1.12.0_linux_arm64.zip
+	sudo chmod +x /usr/local/bin/terraform
 
 inst_gpg_key_for_terraform:
 	#https://stackoverflow.com/questions/75254685/gpg-error-https-apt-releases-hashicorp-com-bionic-inrelease-the-following-si
