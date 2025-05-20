@@ -1,4 +1,4 @@
-install:  inst-basics inst_python inst_projects inst_tools inst_oci save-git-credential#inst_sql 
+install:  inst-basics inst_python inst_projects inst_tools inst_oci save-git-credential inst_gpg_key_for_terraform inst_terraform#inst_sql 
 
 # Update and upgrade system packages
 inst-basics:
@@ -63,7 +63,37 @@ inst_oci:
 	# https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm#InstallingCLI__linux_and_unix
 	# directory: cd /home/ubuntu/.oci
 
-# Save Git credentials globally
+inst_terraform:
+	# https://learn.hashicorp.com/tutorials/terraform/install-cli
+	# https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-terraform-on-ubuntu-20-04
+	yes | sudo apt install unzip
+	yes | sudo apt install wget
+	wget https://releases.hashicorp.com/terraform/1.6.0/terraform_1.6.0_linux_amd64.zip
+	unzip terraform_1.6.0_linux_amd64.zip
+	sudo mv terraform /usr/local/bin/
+	rm terraform_1.6.0_linux_amd64.zip
+
+inst_gpg_key_for_terraform:
+	#https://stackoverflow.com/questions/75254685/gpg-error-https-apt-releases-hashicorp-com-bionic-inrelease-the-following-si
+	# GPG is required for the package signing key
+	sudo apt install gpg
+
+	# Download the signing key to a new keyring
+	wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+
+	# Verify the key's fingerprint
+	gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
+
+	# The fingerprint must match 798A EC65 4E5C 1542 8C8E 42EE AA16 FCBC A621 E701, which can also be verified at https://www.hashicorp.com/security under "Linux Package Checksum Verification".
+
+	# Add the HashiCorp repo
+	echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+
+	# apt update successfully
+	sudo apt update
+	# Save Git credentials globally
+
+
 save-git-credential:
 	git config --global credential.helper store
 
