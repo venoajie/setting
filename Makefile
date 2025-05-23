@@ -23,7 +23,7 @@ inst_projects:
 # Install various tools and utilities
 inst_tools:	
 	yes | sudo apt upgrade && sudo apt update
-	yes | sudo apt install docker.io redis-server install docker-compose
+	yes | sudo apt install docker.io redis-server docker-compose
 	yes | sudo apt install rabbitmq-server
 	yes | sudo rabbitmq-plugins enable rabbitmq_management
 	sudo systemctl enable rabbitmq-server && sudo systemctl start rabbitmq-server
