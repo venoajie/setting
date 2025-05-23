@@ -4,7 +4,7 @@ install:  inst-basics inst_python inst_projects inst_tools inst_oci save-git-cre
 inst-basics:
 	sudo NEEDRESTART_MODE=a apt-get dist-upgrade --yes
 	sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
-	yes | sudo apt upgrade && sudo apt Update
+	yes | sudo apt upgrade && sudo apt update
 
 # Install Python and related tools
 inst_python:
