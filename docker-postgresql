@@ -1,0 +1,199 @@
+#### Phase 1: The Foundation
+
+Ee are creating a *new*, separate environment for our central services.
+
+1.  **Create the central services directory:**
+    ```bash
+    # You are in your home directory: /home/opc
+    mkdir docker-services
+    cd docker-services
+    ```
+
+2.  **Create the `docker-compose.yml` file inside `~/docker-services/`** with the exact content:
+
+services:
+  # This is the ONLY PostgreSQL container you will run for all your projects.
+  postgres:
+    # We are now using the official, multi-architecture pgvector image.
+    image: pgvector/pgvector:pg16 # <-- THIS IS THE FINAL, CORRECTED IMAGE
+    container_name: central_postgres_server
+    restart: always
+    environment:
+      # This is the password for the 'postgres' SUPERUSER. Keep it very safe.
+      # We will create less-privileged users for each application.
+      - POSTGRES_PASSWORD=your_super_secret_main_db_password
+    ports:
+      # Expose the port to your host machine so you can connect with GUI tools
+      # and from apps that are not on the shared Docker network.
+      - "5432:5432"
+    volumes:
+      # This named volume will hold all data for all your databases.
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      # All services that need to talk to each other will join this network.
+      - shared_services_net
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  shared_services_net:
+    driver: bridge
+    name: shared_services_net # Give it a fixed name
+
+3.  **Start the central server and provision the databases:**
+    ```bash
+    # Make sure you are in ~/docker-services
+    docker-compose up -d
+
+    # Connect and create users/databases
+    docker exec -it central_postgres_server psql -U postgres
+
+    # --- Inside psql shell ---
+    CREATE DATABASE trading;
+    CREATE USER trading_app WITH PASSWORD 'your_trading_app_password';
+    GRANT ALL PRIVILEGES ON DATABASE trading TO trading_app;
+
+    CREATE DATABASE llm_indexing;
+    CREATE USER llm_app WITH PASSWORD 'your_llm_app_password';
+    GRANT ALL PRIVILEGES ON DATABASE llm_indexing TO llm_app;
+
+    \c llm_indexing
+    CREATE EXTENSION IF NOT EXISTS vector;
+    GRANT USAGE ON SCHEMA public TO llm_app;
+    GRANT CREATE ON SCHEMA public TO llm_app;
+    \q
+    # --- You have exited psql ---
+    ```
+**Result:** Phase 1 is complete. The foundation is laid, independent of your app locations.
+
+---
+
+#### Phase 2: Migration of `trading-app` (Location is Key)
+
+This is where we apply our knowledge of your directory structure.
+
+1.  **Navigate to the ACTUAL project directory:**
+    ```bash
+    cd /data/apps/trading-app
+    ```
+
+2.  **Backup the existing database:**
+    ```bash
+    # This command must be run from /data/apps/trading-app
+    # It will create the backup file at /data/apps/trading-app/trading_backup.sql
+    docker exec trading-app-postgres-1 pg_dump -U trading_app -d trading > trading_backup.sql
+    ```
+
+3.  **Shut down the old environment:**
+    ```bash
+    # Still in /data/apps/trading-app
+    docker-compose down -v
+    ```
+
+4.  **Modify the `docker-compose.yml` file located at `/data/apps/trading-app/docker-compose.yml`** as described before:
+    *   **DELETE** the entire `postgres` service.
+    *   **MODIFY** the services that used it (`executor`, `analyzer`, etc.) to point `POSTGRES_HOST` to `central_postgres_server`.
+    *   **ADD** the `shared_services_net` to those services.
+    *   **ADD** the `networks: { shared_services_net: { external: true } }` block at the end of the file.
+
+5.  **Restore the data to the central server:**
+    ```bash
+    # Still in /data/apps/trading-app
+    cat trading_backup.sql | docker exec -i central_postgres_server psql -U trading_app -d trading
+    ```
+
+6.  **Launch the updated application:**
+    ```bash
+    # Still in /data/apps/trading-app
+    docker-compose up -d
+    ```
+
+---
+
+#### Phase 3: Integration of `my-ai-assistant` (The LLM App)
+
+We'll assume your `app-indexing-storage` project is the `my-ai-assistant` directory.
+
+1.  **Navigate to the project directory:**
+    ```bash
+    cd ~/my-ai-assistant
+    ```
+
+2.  **Modify the `docker-compose.yml` file located at `~/my-ai-assistant/docker-compose.yml`** as described before:
+    *   **REMOVE** the `librarian_chroma_data` volume from the `librarian` service and the top-level `volumes` section.
+    *   **ADD** the environment variables for PostgreSQL (`POSTGRES_HOST`, `POSTGRES_DB`, etc.) to the `librarian` service.
+    *   **ADD** the `shared_services_net` to the `librarian` service.
+    *   **ADD** the `networks: { shared_services_net: { external: true } }` block at the end of the file.
+    *   **ADD** the Docker secret for the database password.
+
+3.  **Update your application code** inside `~/my-ai-assistant/` to use PostgreSQL instead of ChromaDB.
+
+4.  **Launch the application:**
+    ```bash
+    # Make sure you are in ~/my-ai-assistant
+    docker-compose up -d
+    ```
+
+### Summary of Changes
+
+The game plan is identical in concept. The only change in execution is being mindful of **which directory you are in** when you run your commands.
+
+*   For central services: `~/docker-services`
+*   For the trading app: `/data/apps/trading-app`
+*   For the AI assistant: `~/my-ai-assistant`
+
+You are ready to proceed. This detailed plan, tailored to your environment, will ensure a smooth migration.
+---
+
+### Next Step: Provision Your Databases
+
+Now that the server is running, we need to connect to it and create the "apartments" for your applications. We will create the dedicated databases and users for `trading-app` and `my-ai-assistant`.
+
+**Action:**
+
+Run the following command to open a `psql` command-line shell inside your new container.
+
+```bash
+docker exec -it central_postgres_server psql -U postgres
+```
+
+You will now be inside the PostgreSQL shell, indicated by a prompt like `postgres=#`.
+
+**Copy and paste the following SQL commands into the shell and press Enter.** This will execute them all.
+
+```sql
+-- For the Trading App
+CREATE DATABASE trading;
+CREATE USER trading_app WITH PASSWORD 'the_password_from_your_secret_file';
+GRANT ALL PRIVILEGES ON DATABASE trading TO trading_app;
+
+-- For the LLM Indexing App (my-ai-assistant)
+CREATE DATABASE llm_indexing;
+CREATE USER llm_app WITH PASSWORD 'a_new_strong_password_for_llm_app';
+GRANT ALL PRIVILEGES ON DATABASE llm_indexing TO llm_app;
+
+-- IMPORTANT: Connect to the new LLM database to enable the vector extension
+\c llm_indexing
+
+-- Enable the pgvector extension within this database
+CREATE EXTENSION IF NOT EXISTS vector;
+
+-- Grant permissions for the llm_app user to use it
+GRANT USAGE ON SCHEMA public TO llm_app;
+GRANT CREATE ON SCHEMA public TO llm_app;
+```
+
+After the commands have run successfully, you can exit the `psql` shell by typing:
+
+```
+\q
+```
+...and pressing Enter.
+
+---
+
+Once this is done, **Phase 1 is officially complete.** Your central database server is fully provisioned and ready.
+
+We can now move on to **Phase 2: Migrating your `trading-app`**. You are ready for the next set of instructions from the game plan.
