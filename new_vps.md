@@ -1,8 +1,4 @@
-That's the perfect question to ask. This is the mindset of a proactive SRE: "How do I prevent this from ever happening again?"
-
-The lesson you quoted is the most important one from this incident. Cloud providers offer images as a convenience, but they are not always perfectly configured for every use case, especially for public internet traffic.
-
-Here is a practical, repeatable checklist you should use every time you start a new VPS. This "Day 0 Sanity Check" will take you less than five minutes and can save you hours or days of future debugging.
+A practical, repeatable checklist you should use every time you start a new VPS. This "Day 0 Sanity Check" will take you less than five minutes and can save you hours or days of future debugging.
 
 ---
 
@@ -129,5 +125,3 @@ echo "============================================="
 echo "      Check Complete"
 echo "============================================="
 ```
-
-By running through this checklist, you are taking control of your environment. You are verifying the foundation before you build on it, which is the essence of good Site Reliability Engineering.
