@@ -110,23 +110,23 @@ If you suspect a security breach (e.g., you see strange activity, get a budget a
     *   Review your `SECURITY_SOP.md` log files. Compare the *current* firewall rules (`sudo firewall-cmd --list-all`) with what they *should* be according to your setup log. Has anything changed?
 
 ---
-
+### Section 5: Operational Security Log
 
 *This log records all significant security-related changes made to the infrastructure. Each entry must be dated and include the justification for the change.*
 
 ---Log Entry: #001
 
-Date: Sat Sep  6 10:29:02 AM GMT 2025
+*   **Date:** `Sat Sep  6 10:29:02 AM GMT 2025` 
 
-System(s) Affected:
+*   **System(s) Affected:**
 
-OCI Prod Instance (instance-20250707-0704)
-PostgreSQL Database (Docker container: central_postgres_server)
-Security List: ocid1.securitylist.oc1.eu-frankfurt-1.aa****a
-Change Description:
+*   OCI Prod InstanceOCI Prod Instance (instance-20250707-0704)
+*   PostgreSQL Database (Docker container: central_postgres_server)
+Security List: ocid1.securitylist.oc1.xxx-1.aa****a
+*   **Change Description:**
 Implemented network-level security restrictions for PostgreSQL database and recovered from a PostgreSQL configuration error that caused a service outage.
 
-Actions Taken:
+*   **Action Taken:**
 
 Network Security Implementation (SUCCESSFUL):
 Restricted PostgreSQL port 5432 access via OCI Security List
@@ -154,7 +154,7 @@ docker compose down -v
 docker compose up -d postgres
 PostgreSQL successfully reinitialized with default configuration
 Service restored at 10:07:43 UTC
-Justification & Context:
+*   **Justification & Context:**
 
 Network restrictions: Essential first layer of security to prevent unauthorized database access
 SSL attempt: Tried to implement defense-in-depth but failed due to lack of certificate files
@@ -172,7 +172,8 @@ Current Security Status:
 ⚠️ SSL/TLS: Not implemented (deferred)
 ⚠️ Database Users: Still using default postgres user
 ❌ Previous Data: Lost during recovery (no production data existed)
-Follow-Up Actions Required:
+
+*   **Follow-Up Action:**
 
 Change default postgres user password
 Create application-specific database users with limited privileges
@@ -196,4 +197,3 @@ docker exec -it central_postgres_server psql -U postgres -c "SELECT 1;"
 
 # Emergency rollback to open access (if locked out)
 oci network security-list update --security-list-id [SL_ID] --ingress-security-rules '[{"protocol":"6","source":"0.0.0.0/0","tcpOptions":{"destinationPortRange":{"min":5432,"max":5432}}}]' --force
-This log entry now accurately reflects what happened today, including both the successful network security implementation and the PostgreSQL SSL configuration issue and recovery.
