@@ -116,7 +116,7 @@ If you suspect a security breach (e.g., you see strange activity, get a budget a
 
 ---Log Entry: #001
 
-*   **Date:** `Sat Sep  6 10:29:02 AM GMT 2025` 
+*   **Date:** `Sat Sep  6 09:39:02 AM GMT 2025` 
 
 *   **System(s) Affected:**
 
@@ -153,7 +153,7 @@ bash
 docker compose down -v
 docker compose up -d postgres
 PostgreSQL successfully reinitialized with default configuration
-Service restored at 10:07:43 UTC
+*   **Service restored at:** `Sat Sep  6 10:29:02 AM GMT 2025` 
 *   **Justification & Context:**
 
 Network restrictions: Essential first layer of security to prevent unauthorized database access
