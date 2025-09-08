@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# --- System-Level Setup (Runs as root) ---
+
+# Update the system and install useful tools
+sudo dnf update -y
+sudo dnf install nmap-ncat git vim -y
+
+# --- User-Level Customization (Still runs as root, but creates files for the user) ---
+
+# Create a custom .bashrc for the 'opc' user with a colored prompt
+# This will overwrite the default .bashrc for that user
+cat <<EOF > /home/opc/.bashrc
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+# User specific aliases and functions
+alias ll='ls -alF'
+alias ..='cd ..'
+
+# Custom prompt for this server (e.g., RED for a Bastion)
+PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+EOF
+
+# Set the correct ownership for the new file
+chown opc:opc /home/opc/.bashrc
+
+
+
+
+
+
+# Makes the prompt GREEN
+#PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
+        
+# Custom prompt for this server (e.g., RED for a Bastion)
+#export PS1='\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+EOF
