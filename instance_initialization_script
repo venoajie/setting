@@ -1,17 +1,66 @@
 #!/bin/bash
+#
+# Production-Grade cloud-init script for Oracle Linux 9/10
+#
+# Installs packages in order of stability:
+# 1. Core System & Repositories (Most Stable)
+# 2. Standard Utility Packages
+# 3. Third-Party Repositories (Docker)
+# 4. Direct Script Installers (uv, OCI CLI - Most Volatile)
+#
 
-# --- System-Level Setup (Runs as root) ---
+# Exit immediately if a command exits with a non-zero status.
+set -e
 
-# Update the system and install useful tools
+echo "--- Starting System-Level Setup ---"
+
+# --- Layer 1: Core System & Repositories (Highest Stability) ---
+echo "[1/4] Updating system and enabling EPEL repository..."
 sudo dnf update -y
-sudo dnf install nmap-ncat git vim -y
+# EPEL (Extra Packages for Enterprise Linux) provides many useful packages.
+sudo dnf install -y oracle-epel-release-el9
+echo "Core setup complete."
 
-# --- User-Level Customization (Still runs as root, but creates files for the user) ---
+# --- Layer 2: Standard Utility Packages (High Stability) ---
+echo "[2/4] Installing essential daily-use packages..."
+sudo dnf install -y \
+  git                  `# Version control, essential for any developer` \
+  vim-enhanced         `# A better version of the vim text editor` \
+  tree                 `# Displays directory structures in a clean tree format` \
+  atop                 `# Advanced, interactive system performance monitor (better than top)` \
+  htop                 `# Easier-to-read, interactive process viewer` \
+  unzip                `# For decompressing .zip files` \
+  python3-pip          `# Python's package installer` \
+  dnf-utils            `# Required for managing dnf repositories (for Docker)`
+echo "Utility packages installed."
 
-# Create a custom .bashrc for the 'opc' user with a colored prompt
-# This will overwrite the default .bashrc for that user
-cat <<EOF > /home/opc/.bashrc
-# .bashrc
+# --- Layer 3: Third-Party Repositories (Medium Stability) ---
+echo "[3/4] Adding Docker repository and installing Docker..."
+sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo systemctl start docker
+sudo systemctl enable docker
+# Add the 'opc' user to the docker group to run docker commands without sudo.
+sudo usermod -aG docker opc
+echo "Docker installation complete."
+
+# --- Layer 4: Direct Script Installers (Lowest Stability) ---
+echo "[4/4] Running user-level installers for 'opc' user..."
+# Run user-specific installers as the 'opc' user to isolate them.
+sudo -u opc -i -- bash -c <<'EOF'
+set -e
+
+echo "--- Installing uv (Python package manager) ---"
+curl -LsSf https://astral.sh/uv/install.sh | sh
+echo "uv installation complete."
+
+echo "--- Installing OCI CLI ---"
+bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)" -- --accept-all-defaults
+echo "OCI CLI installation complete."
+
+echo "--- Creating custom .bashrc for opc user ---"
+cat <<'EOM' > /home/opc/.bashrc
+# .bashrc - Custom for OCI Dev Instance
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -21,23 +70,20 @@ fi
 # User specific aliases and functions
 alias ll='ls -alF'
 alias ..='cd ..'
+alias top='htop' # Make htop the default top
 
-# Custom prompt for this server (e.g., RED for a Bastion)
-PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+# Custom prompt for a development server (BLUE)
+export PS1='\[\033[01;34m\]\u@\h\[\033[00m\]:\[\033[01;32m\]\w\[\033[00m\]\$ '
+
+# Add OCI CLI to the PATH
+if [ -f "$HOME/bin/oci" ]; then
+    source "$HOME/lib/oci-cli/bin/env.sh"
+fi
+
+# Add uv to the PATH
+export PATH="$HOME/.cargo/bin:$PATH"
+EOM
+echo "Custom .bashrc created."
 EOF
 
-# Set the correct ownership for the new file
-chown opc:opc /home/opc/.bashrc
-
-
-
-
-
-
-# Makes the prompt GREEN
-#PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-
-        
-# Custom prompt for this server (e.g., RED for a Bastion)
-#export PS1='\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-EOF
+echo "--- Initialization Script Finished Successfully ---"
