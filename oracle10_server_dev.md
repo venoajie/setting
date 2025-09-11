@@ -1,4 +1,4 @@
-# prblem with oracle 10 docker installation:
+# Problem with oracle 10 docker installation:
 #**both** of Docker's primary installation methods are currently incompatible with a fresh Oracle Linux 10 installation:
 #1.  The official DNF repository: **Does not exist.**
 #2.  The official convenience script: **Does not support OL10.**
