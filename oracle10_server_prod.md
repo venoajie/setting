@@ -1,4 +1,4 @@
-# prblem with oracle 10 docker installation:
+# Problem with oracle 10 docker installation:
 #**both** of Docker's primary installation methods are currently incompatible with a fresh Oracle Linux 10 installation:
 #1.  The official DNF repository: **Does not exist.**
 #2.  The official convenience script: **Does not support OL10.**
@@ -15,7 +15,6 @@
 #!/bin/bash
 set -euo pipefail
 
-# Create 
 # Create the entire folder structure correctly with a single command
 sudo mkdir -p /opt/pg-cluster/{bin,config/postgres,config/pgbouncer,data/postgres,logs/{postgres,pgbouncer},backups/{daily,weekly}}
 
